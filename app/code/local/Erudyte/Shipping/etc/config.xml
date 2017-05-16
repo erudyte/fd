@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Erudyte_Shipping>
+            <version>0.1.0</version>
+        </Erudyte_Shipping>
+    </modules>
+    <default>
+        <shipping_rules>
+            <free_delivery>
+                <enabled>true</enabled>
+                <free_delivery_minimum>40.00</free_delivery_minimum>
+            </free_delivery>
+        </shipping_rules>
+    </default>
+    <global>
+        <models>
+            <Erudyte_Shipping>
+                <class>Erudyte_Shipping_Model</class>
+            </Erudyte_Shipping>
+        </models>
+    </global>
+    <frontend>
+        <events>
+            <controller_action_predispatch_checkout_cart_index>
+                <observers>
+                    <Erudyte_Shipping>
+                        <class>erudyte_shipping/observer</class>
+                        <method>calculateFreeDelivery</method>
+                    </Erudyte_Shipping>
+                </observers>
+            </controller_action_predispatch_checkout_cart_index>
+        </events>
+    </frontend>
+</config>

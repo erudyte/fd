@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Erudyte_Shipping>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Erudyte_Shipping>
+    </modules>
+</config>

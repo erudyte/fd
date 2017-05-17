@@ -9,7 +9,7 @@ class Erudyte_Shipping_Model_Observer
      * @return $this
      * @author Graham Crocker <graham.paul.crocker@gmail.com>
      */
-    public function displayFreeDeliveryNotice(Varien_Event_Observer $observer)
+    public function calculateFreeDelivery(Varien_Event_Observer $observer)
     {
         $shippingConfig = $this->getShippingConfig();
         if (!$shippingConfig) {

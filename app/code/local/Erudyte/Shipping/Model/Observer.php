@@ -12,16 +12,25 @@ class Erudyte_Shipping_Model_Observer
     public function displayFreeDeliveryNotice(Varien_Event_Observer $observer)
     {
         $shippingConfig = $this->getShippingConfig();
+        if (!$shippingConfig) {
+            return;
+        }
         if (!$shippingConfig['enabled']) {
             return;
         }
+
+        $checkoutSession = $this->getCheckoutSession();
+
         /** @var Mage_Sales_Model_Quote $quote */
-        $quote = $this->getCheckoutSession()->getQuote();
+        $quote = $checkoutSession->getQuote();
+        if (!$quote || $quote->getItemsCount() === 0) {
+            return;
+        }
         $freeDeliveryMinimum = $shippingConfig['free_delivery_minimum'];
         //get the quote subtotal
         $subtotal = $quote->getSubtotal();
         if ($message = $this->getFreeDeliveryMessage($freeDeliveryMinimum, $subtotal)) {
-            $this->getCheckoutSession()->addNotice($message);
+            $checkoutSession->addNotice($message);
         }
     }
 
